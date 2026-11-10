@@ -1,0 +1,42 @@
+name: 抓取台风实时数据（浙江）
+
+on:
+  schedule:
+    # 每 15 分钟抓取一次（UTC）。GitHub 定时任务可能略有延迟，属正常。
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: typhoon-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 配置 Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: 抓取并生成 data/realtime.json
+        run: node scripts/fetch-typhoon.js
+
+      - name: 提交（若有变更）
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/realtime.json
+          if git diff --cached --quiet; then
+            echo "无数据变更，跳过提交"
+          else
+            git commit -m "data: 自动更新台风实况 $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git push
+          fi
