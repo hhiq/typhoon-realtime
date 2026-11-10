@@ -8,10 +8,15 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 </head>
 <body>
+  <!-- 醒目演示数据标注：上线接入真实数据后由 app.js 自动隐藏 -->
+  <div id="demoStrip" class="demo-strip">
+    ⚠️ 演示数据 · 本页面为原型演示，<b>非真实台风信息</b>，请勿据此防灾避险，请以中央气象台等官方发布为准
+  </div>
+
   <div id="banner" class="banner"></div>
 
   <header class="topbar">
-    <h1>台风实况信息</h1>
+    <h1>台风实况信息 <span class="demo-pill">演示</span></h1>
     <p class="sub">面向沿海居民 · 实时 · 分级预警</p>
   </header>
 
@@ -24,6 +29,7 @@
           <div class="ty-num" id="ty-number">--</div>
         </div>
         <div class="badges">
+          <span class="demo-tag" id="ty-demo">演示数据</span>
           <span class="cat" id="ty-category">--</span>
           <span class="en" id="ty-en">--</span>
         </div>
@@ -55,13 +61,14 @@
 
     <!-- 路径与位置地图 -->
     <section class="card">
-      <h2>路径与位置</h2>
+      <h2>路径与位置 <span class="demo-tag">演示数据</span></h2>
       <div id="map" class="map"></div>
       <div class="legend">
         <span><i class="ln solid"></i> 已发生路径</span>
         <span><i class="ln dash"></i> 预报路径</span>
         <span><i class="dot cur"></i> 当前位置</span>
       </div>
+      <p class="sec-disc">※ 图中路径与坐标均为演示数据，非真实台风轨迹。</p>
     </section>
 
     <!-- 分级预警 -->
@@ -73,7 +80,7 @@
     <footer class="foot">
       <p>数据更新时间：<span id="update-time">--</span></p>
       <p>数据来源：<span id="source">--</span></p>
-      <p class="disc">本页为示例原型，数据为模拟值；正式上线请以中央气象台等官方发布为准。</p>
+      <p class="disc"><b>重要提示：</b>本页当前展示的全部内容为演示数据（模拟值），并非真实台风信息，仅用于界面原型展示。正式上线后将接入中央气象台等官方实时数据，防灾避险请务必以官方发布为准。</p>
     </footer>
   </main>
 
