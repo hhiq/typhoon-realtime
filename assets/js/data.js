@@ -1,9 +1,11 @@
 /* =========================================================
- * 数据层（示例 / 模拟数据）
+ * 数据层
  * ---------------------------------------------------------
- * 上线时请把 loadTyphoon() 替换为真实接口调用，例如：
- *   fetch('https://www.nmc.cn/rest/findTyphoon')
- * 字段结构保持不变即可，UI 与地图无需改动。
+ * 演示数据（TYPHOON）仅作离线/抓取失败时的回退。
+ * 正式运行由 GitHub Actions 每 15 分钟调用 scripts/fetch-typhoon.js，
+ * 抓取浙江省水利厅台风路径系统并生成 data/realtime.json；
+ * loadTyphoon() 优先读取该实时文件（no-store，避免缓存），
+ * 失败或尚未生成时回退到下方演示数据。UI 与地图无需改动。
  * ========================================================= */
 
 const TYPHOON = {
@@ -73,8 +75,19 @@ const WARNING_LEVELS = [
   }
 ];
 
-/* 真实数据接入位（预留）：返回结构与上方 TYPHOON 一致即可 */
+/* 数据接入：优先读取实时文件，失败回退演示数据 */
 function loadTyphoon() {
-  // 示例：return fetch(API).then(r => r.json());
-  return Promise.resolve(TYPHOON);
+  return fetch("data/realtime.json", { cache: "no-store" })
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
+    .then(function (d) {
+      if (d && d.active === false) return d;        // 真实“无台风”态
+      if (d && d.meta) { d.meta.isSample = false; return d; } // 真实数据
+      throw new Error("数据格式异常");
+    })
+    .catch(function () {
+      return TYPHOON; // 抓取/网络异常时回退演示数据（isSample=true 会显示演示标注）
+    });
 }
