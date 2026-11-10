@@ -10,6 +10,12 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",Segoe UI,Roboto,sans-serif;
   background:var(--bg); color:var(--text); line-height:1.55; -webkit-font-smoothing:antialiased;
 }
+/* 演示数据醒目标注 */
+.demo-strip{background:#fff4d6;color:#8a5a00;border-bottom:1px solid #f0d99a;font-size:13px;font-weight:600;text-align:center;padding:9px 14px;line-height:1.45}
+.demo-strip b{color:#b45309}
+.demo-pill{display:inline-block;background:#fde68a;color:#8a5a00;font-size:12px;font-weight:700;padding:1px 8px;border-radius:6px;vertical-align:middle;margin-left:6px}
+.demo-tag{display:inline-block;background:#fff4d6;color:#8a5a00;font-size:12px;font-weight:700;padding:3px 9px;border-radius:8px;margin-right:6px;vertical-align:middle}
+.sec-disc{font-size:12px;color:#b08900;margin:10px 0 0}
 .banner{color:#fff;padding:14px 16px;}
 .banner-inner{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-weight:700;font-size:16px}
 .banner .badge{background:rgba(255,255,255,.25);border:1px solid rgba(255,255,255,.6);padding:2px 10px;border-radius:999px;font-size:14px}
@@ -49,7 +55,7 @@ body{
 .wacts{margin:0;padding-left:18px;font-size:13px}
 .wacts li{margin:3px 0}
 .foot{text-align:center;color:var(--muted);font-size:12px;margin-top:18px}
-.foot .disc{margin-top:8px;color:#9aa7b6}
+.foot .disc{margin-top:8px;color:#b08900;background:#fff4d6;border:1px solid #f0d99a;border-radius:10px;padding:10px 12px;line-height:1.6}
 .typhoon-icon{font-size:24px;line-height:28px;text-align:center}
 @media(min-width:600px){
   .grid{grid-template-columns:1fr 1fr 1fr 1fr}
