@@ -4,6 +4,11 @@
 
 function initMap(data) {
   var container = document.getElementById("map");
+  // 无轨迹数据（无活跃台风）时仅提示，不绘制
+  if (!data || !data.track || !data.track.past || !data.track.past.length) {
+    container.innerHTML = '<div class="map-note" style="padding:40px 12px">暂无路径数据</div>';
+    return;
+  }
   if (typeof L !== "undefined") {
     try {
       var map = L.map("map", { scrollWheelZoom: false }).setView([data.current.lat, data.current.lon], 5);
