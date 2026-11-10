@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>台风实况 · 沿海居民预警</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+</head>
+<body>
+  <div id="banner" class="banner"></div>
+
+  <header class="topbar">
+    <h1>台风实况信息</h1>
+    <p class="sub">面向沿海居民 · 实时 · 分级预警</p>
+  </header>
+
+  <main class="container">
+    <!-- 台风实况卡片：名称 / 位置 / 移动 / 风力 -->
+    <section class="hero card">
+      <div class="hero-head">
+        <div>
+          <div class="ty-name" id="ty-name">--</div>
+          <div class="ty-num" id="ty-number">--</div>
+        </div>
+        <div class="badges">
+          <span class="cat" id="ty-category">--</span>
+          <span class="en" id="ty-en">--</span>
+        </div>
+      </div>
+
+      <div class="grid">
+        <div class="cell">
+          <div class="label">当前位置</div>
+          <div class="big" id="pos-coord">--</div>
+          <div class="small" id="pos-near">--</div>
+        </div>
+        <div class="cell">
+          <div class="label">移动方向 / 速度</div>
+          <div class="big" id="move-dir">--</div>
+          <div class="small" id="move-speed">--</div>
+        </div>
+        <div class="cell">
+          <div class="label">最大风力</div>
+          <div class="big" id="wind-level">--</div>
+          <div class="small" id="wind-speed">--</div>
+        </div>
+        <div class="cell">
+          <div class="label">中心气压</div>
+          <div class="big" id="wind-pressure">--</div>
+          <div class="small" id="wind-radii">--</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 路径与位置地图 -->
+    <section class="card">
+      <h2>路径与位置</h2>
+      <div id="map" class="map"></div>
+      <div class="legend">
+        <span><i class="ln solid"></i> 已发生路径</span>
+        <span><i class="ln dash"></i> 预报路径</span>
+        <span><i class="dot cur"></i> 当前位置</span>
+      </div>
+    </section>
+
+    <!-- 分级预警 -->
+    <section class="card">
+      <h2>分级预警</h2>
+      <div id="warnings" class="warnings"></div>
+    </section>
+
+    <footer class="foot">
+      <p>数据更新时间：<span id="update-time">--</span></p>
+      <p>数据来源：<span id="source">--</span></p>
+      <p class="disc">本页为示例原型，数据为模拟值；正式上线请以中央气象台等官方发布为准。</p>
+    </footer>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="assets/js/data.js"></script>
+  <script src="assets/js/map.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
