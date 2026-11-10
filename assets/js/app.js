@@ -63,6 +63,17 @@ function render(data) {
   document.getElementById("update-time").textContent = meta.updateTime;
   document.getElementById("source").textContent = meta.source;
 
+  // 演示数据标注：仅当 isSample 为真时显示；接入真实数据后自动隐藏
+  var isSample = meta.isSample === true;
+  document.getElementById("demoStrip").style.display = isSample ? "" : "none";
+  document.getElementById("ty-demo").style.display = isSample ? "" : "none";
+  document.getElementById("map").closest(".card").querySelectorAll(".demo-tag").forEach(function (el) {
+    el.style.display = isSample ? "" : "none";
+  });
+  document.querySelectorAll(".demo-pill").forEach(function (el) {
+    el.style.display = isSample ? "" : "none";
+  });
+
   // 地图
   initMap(data);
 }
